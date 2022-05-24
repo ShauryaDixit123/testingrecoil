@@ -1,30 +1,29 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { atom, useAtom } from "jotai";
 import Link from "next/link";
 import { useHydrateAtoms } from "jotai/utils";
 
 const state = atom("Hello");
 
-function Page1() {
-  const [input, setInput] = useState("");
-  const [newState, setNewState] = useAtom(state);
-
+function Page2() {
   useEffect(() => {
-    console.log("Index Page called!");
+    console.log("Page 2 called!");
 
     return () => {
       setNewState("Hello");
     };
   }, [setNewState]);
 
+  const [input, setInput] = useState("");
+  const [newState, setNewState] = useAtom(state);
+
   return (
     <div>
-      <Link href="/page2">
-        <a>Goto Page 2</a>
-      </Link>
+      <h1>Page 2</h1>
 
-      <br></br>
-      <br></br>
+      <Link href="/">
+        <a>Home</a>
+      </Link>
 
       <input
         placeholder="value of new state"
@@ -37,4 +36,4 @@ function Page1() {
   );
 }
 
-export default Page1;
+export default Page2;

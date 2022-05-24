@@ -1,21 +1,19 @@
 import { useState, useEffect } from "react";
-import { atom, useAtom } from "jotai";
+import { useRecoilState } from "recoil";
+import { atom } from "recoil";
 import Link from "next/link";
-import { useHydrateAtoms } from "jotai/utils";
 
-const state = atom("Hello");
+const state = atom({
+  key: "state1",
+  default: "Hello",
+});
 
 function Page1() {
-  const [input, setInput] = useState("");
-  const [newState, setNewState] = useAtom(state);
-
   useEffect(() => {
-    console.log("Index Page called!");
-
-    return () => {
-      setNewState("Hello");
-    };
-  }, [setNewState]);
+    console.log("Page 1 called!");
+  });
+  const [input, setInput] = useState("");
+  const [newState, setNewState] = useRecoilState(state);
 
   return (
     <div>
